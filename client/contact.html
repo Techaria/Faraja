@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact - Faraja Holdings</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-white shadow">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+      <a href="/" class="text-xl sm:text-2xl font-bold text-teal-700">Faraja Holdings</a>
+      <nav class="hidden md:flex space-x-6 text-gray-700 text-sm">
+        <a href="/products.html" class="hover:text-teal-700 transition">Products</a>
+        <a href="/contact.html" class="hover:text-teal-700 transition font-medium">Contact</a>
+        <a href="/admin" class="hover:text-teal-800 transition">Admin</a>
+      </nav>
+      <button id="mobileMenuBtn" class="md:hidden text-teal-700 text-2xl">☰</button>
+    </div>
+    <nav id="mobileMenu" class="hidden md:hidden bg-white border-t">
+      <div class="px-4 py-2 space-y-2 text-sm">
+        <a href="/products.html" class="block py-2 hover:text-teal-700">Products</a>
+        <a href="/contact.html" class="block py-2 font-medium text-teal-700">Contact</a>
+        <a href="/admin" class="block py-2 hover:text-teal-700">Admin</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="bg-white border rounded-lg p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4">Contact Information</h2>
+      <p class="text-gray-700 mb-2 font-semibold">Faraja Holdings Ltd.</p>
+      <p class="text-gray-700 mb-1">📧 Email: info@farajaholdings.com</p>
+      <p class="text-gray-700 mb-1">📞 Phone: +254 700 123 456</p>
+      <p class="text-gray-700">📍 Address: Nairobi, Kenya</p>
+    </div>
+
+    <form id="contactForm" class="bg-white border rounded-lg p-6 sm:p-8 space-y-4">
+      <h2 class="text-2xl font-bold">Send Inquiry</h2>
+      <input type="text" name="name" placeholder="Your name" class="w-full border rounded px-3 py-2" required />
+      <input type="email" name="email" placeholder="Email" class="w-full border rounded px-3 py-2" />
+      <input type="text" name="phone" placeholder="Phone" class="w-full border rounded px-3 py-2" />
+      <textarea name="message" placeholder="Message" class="w-full border rounded px-3 py-2" required></textarea>
+      <button class="bg-teal-700 hover:bg-teal-800 text-white px-4 py-2 rounded">Send</button>
+      <div id="status" class="text-sm text-gray-600"></div>
+    </form>
+  </main>
+
+  <footer class="bg-gray-900 text-gray-300 mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
+      <div>
+        <h3 class="text-white font-bold mb-3">Faraja Holdings</h3>
+        <p class="text-sm leading-relaxed">Premium hardware and building supplies for professionals and DIY enthusiasts.</p>
+      </div>
+      <div>
+        <h3 class="text-white font-bold mb-3">Quick Links</h3>
+        <ul class="text-sm space-y-1.5">
+          <li><a href="/products.html" class="hover:text-white transition">Products</a></li>
+          <li><a href="/contact.html" class="hover:text-white transition">Contact Us</a></li>
+          <li><a href="/" class="hover:text-white transition">Home</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-white font-bold mb-3">Contact & Hours</h3>
+        <p class="text-sm">📞 +254 700 123 456</p>
+        <p class="text-sm">📧 info@farajaholdings.com</p>
+        <p class="text-sm mt-3 font-semibold">Hours:</p>
+        <p class="text-sm">Mon-Fri: 8AM - 6PM</p>
+        <p class="text-sm">Sat: 9AM - 4PM</p>
+      </div>
+    </div>
+    <div class="border-t border-gray-700 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-sm text-gray-500 text-center">© 2025 Faraja Holdings. All rights reserved.</div>
+  </footer>
+
+  <script src="/assets/js/api.js"></script>
+  <script>
+    document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    });
+  </script>
+  <script src="/assets/js/contact.js"></script>
+</body>
+</html>

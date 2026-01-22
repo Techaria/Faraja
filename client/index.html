@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Faraja Holdings - Hardware Supplier</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0f766e',
+            secondary: '#134e4a',
+            accent: '#ea580c'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .gradient-hero {
+      background: linear-gradient(135deg, #0f766e 0%, #134e4a 100%);
+    }
+    .card-hover {
+      transition: all 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+    }
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    @media (max-width: 768px) {
+      .hero-max-h { height: 400px !important; }
+    }
+    @media (min-width: 769px) {
+      .hero-max-h { height: 500px !important; }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <header class="sticky-header">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+      <a href="/" class="text-xl sm:text-2xl font-bold text-primary">Faraja Holdings</a>
+      <nav class="hidden md:flex space-x-6 text-gray-700 text-sm">
+        <a href="/products.html" class="hover:text-primary transition">Products</a>
+        <a href="/contact.html" class="hover:text-primary transition">Contact</a>
+        <a href="/admin" class="hover:text-secondary transition">Admin</a>
+      </nav>
+      <button id="mobileMenuBtn" class="md:hidden text-primary text-2xl">☰</button>
+    </div>
+    <!-- Mobile Menu -->
+    <nav id="mobileMenu" class="hidden md:hidden bg-white border-t">
+      <div class="px-4 py-2 space-y-2 text-sm">
+        <a href="/products.html" class="block py-2 hover:text-primary">Products</a>
+        <a href="/contact.html" class="block py-2 hover:text-primary">Contact</a>
+        <a href="/admin" class="block py-2 hover:text-primary">Admin</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero Section with Categories -->
+    <section id="hero" class="relative isolate overflow-hidden gradient-hero text-white flex items-center min-h-96">
+      <div class="absolute inset-0">
+        <div id="hero-bg" class="absolute inset-0 bg-cover bg-center opacity-70 transition-opacity duration-700"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/85"></div>
+      </div>
+      <div class="relative max-w-7xl mx-auto w-full px-3 sm:px-6 lg:px-8 py-8 sm:py-14">
+        <div class="flex flex-col gap-6 items-center">
+          <div id="hero-categories" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 w-full"></div>
+          <div>
+            <a href="/products.html" class="inline-block bg-accent hover:bg-orange-400 text-white px-5 sm:px-8 py-2.5 sm:py-3 rounded-lg font-semibold transition shadow-lg hover:shadow-xl text-sm sm:text-base">
+              Browse All Products
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Limited Time Offers Section -->
+    <section class="bg-gradient-to-r from-orange-50 to-red-50 border-b">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-12">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 mb-6 sm:mb-8">
+          <h2 class="text-xl sm:text-3xl font-bold text-gray-900">Limited Time Offers</h2>
+          <div class="flex items-center gap-2 bg-red-500 text-white px-3 sm:px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm whitespace-nowrap">
+            <span id="countdown">24:59:59</span>
+          </div>
+        </div>
+        <div id="offers-grid" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us + Newsletter CTA Section -->
+    <section class="bg-white border-b">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center">
+          <!-- Why Choose Us -->
+          <div>
+            <h2 class="text-xl sm:text-3xl font-bold mb-6 sm:mb-8">Why Choose Faraja</h2>
+            <div class="space-y-4 sm:space-y-6">
+              <div class="flex gap-3 sm:gap-4">
+                <div class="text-3xl sm:text-4xl flex-shrink-0">🏢</div>
+                <div class="min-w-0">
+                  <h3 class="font-bold text-base sm:text-lg mb-1">Industry Leader</h3>
+                  <p class="text-gray-600 text-xs sm:text-sm">3+ years trusted by contractors and businesses across Kenya</p>
+                </div>
+              </div>
+              <div class="flex gap-3 sm:gap-4">
+                <div class="text-3xl sm:text-4xl flex-shrink-0">📦</div>
+                <div class="min-w-0">
+                  <h3 class="font-bold text-base sm:text-lg mb-1">Wide Selection</h3>
+                  <p class="text-gray-600 text-xs sm:text-sm">Thousands of quality products from global and local suppliers</p>
+                </div>
+              </div>
+              <div class="flex gap-3 sm:gap-4">
+                <div class="text-3xl sm:text-4xl flex-shrink-0">🔒</div>
+                <div class="min-w-0">
+                  <h3 class="font-bold text-base sm:text-lg mb-1">Quality Guaranteed</h3>
+                  <p class="text-gray-600 text-xs sm:text-sm">Every item verified for authenticity and durability</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Newsletter Signup CTA -->
+          <div class="gradient-hero text-white rounded-lg p-6 sm:p-10 shadow-lg">
+            <h2 class="text-lg sm:text-3xl font-bold mb-2 sm:mb-3">Stay Updated</h2>
+            <p class="text-white/90 mb-4 sm:mb-6 text-sm sm:text-base">Get exclusive offers and new product announcements straight to your inbox.</p>
+            <form id="newsletterForm" class="flex flex-col gap-2 sm:gap-3">
+              <input type="email" placeholder="Enter your email" required class="px-3 sm:px-4 py-2.5 sm:py-3 rounded text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white text-sm sm:text-base" />
+              <button type="submit" class="bg-accent hover:bg-orange-600 text-white px-6 py-2.5 sm:py-3 rounded font-semibold transition text-sm sm:text-base">Subscribe Now</button>
+            </form>
+            <p class="text-white/70 text-xs mt-3 sm:mt-4">We respect your privacy. Unsubscribe anytime.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust Badges Section -->
+    <section class="bg-white border-b">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
+          <div class="flex flex-col items-center text-center">
+            <div class="text-2xl sm:text-3xl mb-1 sm:mb-2">🚚</div>
+            <h3 class="font-semibold text-xs sm:text-base">Fast Delivery</h3>
+            <p class="text-xs text-gray-600">24-48 hours</p>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <div class="text-2xl sm:text-3xl mb-1 sm:mb-2">✓</div>
+            <h3 class="font-semibold text-xs sm:text-base">Genuine Products</h3>
+            <p class="text-xs text-gray-600">100% authentic</p>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <div class="text-2xl sm:text-3xl mb-1 sm:mb-2">💬</div>
+            <h3 class="font-semibold text-xs sm:text-base">Expert Support</h3>
+            <p class="text-xs text-gray-600">24/7 available</p>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <div class="text-2xl sm:text-3xl mb-1 sm:mb-2">💰</div>
+            <h3 class="font-semibold text-xs sm:text-base">Best Prices</h3>
+            <p class="text-xs text-gray-600">Price guaranteed</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-gray-900 text-gray-300">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8">
+      <div>
+        <h3 class="text-white font-bold mb-2 sm:mb-3 text-sm sm:text-base">Faraja Holdings</h3>
+        <p class="text-xs sm:text-sm leading-relaxed">Premium hardware and building supplies for professionals and DIY enthusiasts across Kenya.</p>
+      </div>
+      <div>
+        <h3 class="text-white font-bold mb-2 sm:mb-3 text-sm sm:text-base">Quick Links</h3>
+        <ul class="text-xs sm:text-sm space-y-1">
+          <li><a href="/products.html" class="hover:text-white transition">Products</a></li>
+          <li><a href="/contact.html" class="hover:text-white transition">Contact Us</a></li>
+          <li><a href="/" class="hover:text-white transition">Home</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-white font-bold mb-2 sm:mb-3 text-sm sm:text-base">Contact & Hours</h3>
+        <p class="text-xs sm:text-sm">📞 +254 700 123 456</p>
+        <p class="text-xs sm:text-sm">📧 info@farajaholdings.com</p>
+        <p class="text-xs sm:text-sm mt-2 font-semibold">Hours:</p>
+        <p class="text-xs sm:text-sm">Mon-Fri: 8AM - 6PM</p>
+        <p class="text-xs sm:text-sm">Sat: 9AM - 4PM</p>
+      </div>
+    </div>
+    <div class="border-t border-gray-700 max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-3 sm:py-4 text-xs sm:text-sm text-gray-500 text-center">© <span id="year"></span> Faraja Holdings. All rights reserved.</div>
+  </footer>
+
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/index.js"></script>
+</body>
+</html>
