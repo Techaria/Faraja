@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: faraja-server
+    name: faraja
     runtime: node
     region: oregon
     plan: free
