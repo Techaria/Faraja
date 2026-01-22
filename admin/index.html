@@ -3,106 +3,237 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Admin - Faraja Holdings</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Admin Dashboard - Faraja Holdings</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0f766e',
+            secondary: '#134e4a',
+            accent: '#ea580c'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .transition-all-smooth {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+    }
+  </style>
 </head>
 <body class="bg-gray-50 text-gray-900">
-  <header class="bg-white shadow">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-      <a href="/" class="text-2xl font-semibold text-primary">Faraja Holdings</a>
-      <nav class="space-x-6 text-gray-700">
+  <!-- Header -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-gray-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex items-center justify-between">
+      <a href="/" class="text-lg sm:text-xl lg:text-2xl font-bold text-primary">Faraja Holdings</a>
+      
+      <!-- Desktop Nav -->
+      <nav class="hidden sm:flex items-center gap-6 text-sm text-gray-700">
         <a href="/products.html" class="hover:text-primary transition">Products</a>
         <a href="/contact.html" class="hover:text-primary transition">Contact</a>
+        <a href="/" class="hover:text-primary transition">Home</a>
       </nav>
+
+      <!-- Mobile Menu Button -->
+      <button id="mobileMenuBtn" class="sm:hidden text-primary text-2xl" aria-label="Toggle menu">☰</button>
     </div>
+
+    <!-- Mobile Menu -->
+    <nav id="mobileMenu" class="hidden sm:hidden bg-white border-t">
+      <div class="px-4 py-3 space-y-2 text-sm">
+        <a href="/products.html" class="block py-2 hover:text-primary">Products</a>
+        <a href="/contact.html" class="block py-2 hover:text-primary">Contact</a>
+        <a href="/" class="block py-2 hover:text-primary">Home</a>
+      </div>
+    </nav>
   </header>
 
-  <main class="max-w-7xl mx-auto px-4 py-8">
-    <h1 class="text-3xl font-semibold mb-6">Admin Dashboard</h1>
-    <div class="flex gap-2 mb-6">
-      <button data-tab="dashboard" class="tab-btn bg-primary text-white px-4 py-2 rounded">Overview</button>
-      <button data-tab="products" class="tab-btn bg-white border px-4 py-2 rounded">Products</button>
-      <button data-tab="categories" class="tab-btn bg-white border px-4 py-2 rounded">Categories</button>
-      <button data-tab="orders" class="tab-btn bg-white border px-4 py-2 rounded">Orders</button>
+  <main class="min-h-[calc(100vh-200px)]">
+    <!-- Page Title -->
+    <div class="bg-gradient-to-r from-primary/5 to-secondary/5 border-b border-primary/10 px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+      <div class="max-w-7xl mx-auto">
+        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900">Admin Dashboard</h1>
+        <p class="text-sm sm:text-base text-gray-600 mt-1">Manage products, categories, and customer orders</p>
+      </div>
     </div>
 
-    <!-- Dashboard -->
-    <section id="tab-dashboard" class="tab">
-      <div class="grid md:grid-cols-3 gap-4">
-        <div class="bg-white border rounded p-4"><div class="text-sm text-gray-600">Products</div><div id="stat-products" class="text-3xl font-semibold">0</div></div>
-        <div class="bg-white border rounded p-4"><div class="text-sm text-gray-600">Categories</div><div id="stat-categories" class="text-3xl font-semibold">0</div></div>
-        <div class="bg-white border rounded p-4"><div class="text-sm text-gray-600">Orders</div><div id="stat-orders" class="text-3xl font-semibold">0</div></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+      <!-- Tabs Navigation -->
+      <div class="flex flex-wrap gap-2 mb-6 sm:mb-8 border-b border-gray-200">
+        <button data-tab="dashboard" class="tab-btn px-4 sm:px-6 py-3 text-sm sm:text-base font-medium border-b-2 border-primary text-primary transition-all-smooth">
+          Overview
+        </button>
+        <button data-tab="products" class="tab-btn px-4 sm:px-6 py-3 text-sm sm:text-base font-medium border-b-2 border-transparent text-gray-600 hover:text-primary transition-all-smooth">
+          Products
+        </button>
+        <button data-tab="categories" class="tab-btn px-4 sm:px-6 py-3 text-sm sm:text-base font-medium border-b-2 border-transparent text-gray-600 hover:text-primary transition-all-smooth">
+          Categories
+        </button>
+        <button data-tab="orders" class="tab-btn px-4 sm:px-6 py-3 text-sm sm:text-base font-medium border-b-2 border-transparent text-gray-600 hover:text-primary transition-all-smooth">
+          Orders
+        </button>
       </div>
-    </section>
 
-    <!-- Products -->
-    <section id="tab-products" class="tab hidden">
-      <div class="bg-white border rounded p-4 mb-6">
-        <h2 class="text-xl font-semibold mb-2">Add Product</h2>
-        <form id="productForm" class="grid md:grid-cols-2 gap-3 items-end">
-          <input type="text" name="name" placeholder="Product name" class="border rounded px-3 py-2" required />
-          <select name="category_id" id="prodCategory" class="border rounded px-3 py-2"></select>
-          <input type="number" step="0.01" name="price" placeholder="Price" class="border rounded px-3 py-2" required />
-          <input type="file" name="image" accept="image/*" class="border rounded px-3 py-2" />
-          <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-4 py-2 rounded shadow-sm transition">Submit Product</button>
-          <div id="prodStatus" class="text-sm text-gray-600 md:col-span-2"></div>
-        </form>
-      </div>
-      <div class="bg-white border rounded p-4">
-        <h2 class="text-xl font-semibold mb-2">Products List</h2>
-        <div id="productsList" class="grid md:grid-cols-2 gap-4"></div>
-      </div>
-    </section>
+      <!-- Dashboard Tab -->
+      <section id="tab-dashboard" class="tab space-y-6 sm:space-y-8">
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+          <!-- Products Card -->
+          <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-6 hover:shadow-md transition-all-smooth">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Total Products</h3>
+              <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                <span class="text-lg text-primary">📦</span>
+              </div>
+            </div>
+            <p id="stat-products" class="text-3xl sm:text-4xl font-bold text-gray-900">0</p>
+            <p class="text-xs sm:text-sm text-gray-500 mt-2">Active products in catalog</p>
+          </div>
 
-    <!-- Categories -->
-    <section id="tab-categories" class="tab hidden">
-      <div class="bg-white border rounded p-4 mb-6">
-        <h2 class="text-xl font-semibold mb-2">Add Category</h2>
-        <form id="categoryForm" class="flex gap-3 items-end">
-          <input type="text" name="name" placeholder="Category name" class="border rounded px-3 py-2" required />
-          <button class="bg-primary text-white px-4 py-2 rounded">Add</button>
-          <div id="catStatus" class="text-sm text-gray-600"></div>
-        </form>
-      </div>
-      <div class="bg-white border rounded p-4">
-        <h2 class="text-xl font-semibold mb-2">Categories</h2>
-        <div id="categoriesList" class="grid md:grid-cols-2 gap-4"></div>
-      </div>
-    </section>
+          <!-- Categories Card -->
+          <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-6 hover:shadow-md transition-all-smooth">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Categories</h3>
+              <div class="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center">
+                <span class="text-lg text-secondary">🏷️</span>
+              </div>
+            </div>
+            <p id="stat-categories" class="text-3xl sm:text-4xl font-bold text-gray-900">0</p>
+            <p class="text-xs sm:text-sm text-gray-500 mt-2">Product categories</p>
+          </div>
 
-    <!-- Orders -->
-    <section id="tab-orders" class="tab hidden">
-      <div class="bg-white border rounded p-4">
-        <h2 class="text-xl font-semibold mb-4">Customer Orders / Inquiries</h2>
-        <div id="ordersList" class="space-y-6"></div>
-      </div>
-    </section>
+          <!-- Orders Card -->
+          <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-6 hover:shadow-md transition-all-smooth">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Orders</h3>
+              <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center">
+                <span class="text-lg text-accent">🛒</span>
+              </div>
+            </div>
+            <p id="stat-orders" class="text-3xl sm:text-4xl font-bold text-gray-900">0</p>
+            <p class="text-xs sm:text-sm text-gray-500 mt-2">Customer orders received</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Products Tab -->
+      <section id="tab-products" class="tab hidden space-y-6 sm:space-y-8">
+        <!-- Add Product Form -->
+        <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-4 sm:p-6">
+          <h2 class="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">Add New Product</h2>
+          <form id="productForm" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Product Name</label>
+                <input type="text" name="name" placeholder="e.g., Cement 50kg Bag" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary text-sm" required />
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Category</label>
+                <select name="category_id" id="prodCategory" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary text-sm"></select>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Price (KES)</label>
+                <input type="number" step="0.01" name="price" placeholder="0.00" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary text-sm" required />
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Product Image</label>
+                <input type="file" name="image" accept="image/*" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary text-sm file:mr-3 file:px-2 file:py-1 file:bg-primary/10 file:text-primary file:border-0 file:rounded" />
+              </div>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-3">
+              <button type="submit" class="flex-1 sm:flex-none bg-primary hover:bg-secondary text-white font-semibold px-6 py-2.5 rounded-lg transition-all-smooth shadow-sm">
+                ✓ Add Product
+              </button>
+              <div id="prodStatus" class="text-sm text-gray-600 py-2.5 sm:py-0"></div>
+            </div>
+          </form>
+        </div>
+
+        <!-- Products List -->
+        <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-4 sm:p-6">
+          <h2 class="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">Products List</h2>
+          <div id="productsList" class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6"></div>
+          <div id="noProducts" class="hidden text-center py-12 text-gray-500">
+            <p class="text-lg">No products yet</p>
+            <p class="text-sm">Add your first product using the form above</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Categories Tab -->
+      <section id="tab-categories" class="tab hidden space-y-6 sm:space-y-8">
+        <!-- Add Category Form -->
+        <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-4 sm:p-6">
+          <h2 class="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">Add New Category</h2>
+          <form id="categoryForm" class="flex flex-col sm:flex-row gap-3">
+            <input type="text" name="name" placeholder="e.g., Power Tools" class="flex-1 border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary text-sm" required />
+            <button type="submit" class="sm:w-auto bg-primary hover:bg-secondary text-white font-semibold px-6 py-2.5 rounded-lg transition-all-smooth shadow-sm">
+              + Add Category
+            </button>
+            <div id="catStatus" class="text-sm text-gray-600 w-full sm:w-auto py-2.5 sm:py-0"></div>
+          </form>
+        </div>
+
+        <!-- Categories List -->
+        <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-4 sm:p-6">
+          <h2 class="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">Categories</h2>
+          <div id="categoriesList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"></div>
+          <div id="noCategories" class="hidden text-center py-12 text-gray-500">
+            <p class="text-lg">No categories yet</p>
+            <p class="text-sm">Create your first category above</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Orders Tab -->
+      <section id="tab-orders" class="tab hidden space-y-4 sm:space-y-6">
+        <div>
+          <h2 class="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">Customer Orders & Inquiries</h2>
+          <div id="ordersList" class="space-y-4 sm:space-y-6"></div>
+          <div id="noOrders" class="hidden text-center py-12 text-gray-500">
+            <p class="text-lg">No orders yet</p>
+            <p class="text-sm">Customer orders will appear here</p>
+          </div>
+        </div>
+      </section>
+    </div>
   </main>
 
+
+  <!-- Footer -->
   <footer class="bg-gray-900 text-gray-300 mt-12">
-    <div class="max-w-7xl mx-auto px-4 py-12 grid md:grid-cols-3 gap-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
       <div>
-        <h3 class="text-white font-semibold mb-3">Faraja Holdings</h3>
-        <p class="text-sm">Admin Dashboard</p>
+        <h3 class="text-white font-bold mb-3">Faraja Holdings</h3>
+        <p class="text-sm leading-relaxed">Premium hardware and building supplies for professionals and DIY enthusiasts across Kenya.</p>
       </div>
       <div>
-        <h3 class="text-white font-semibold mb-3">Quick Links</h3>
-        <ul class="text-sm space-y-1">
+        <h3 class="text-white font-bold mb-3">Quick Links</h3>
+        <ul class="text-sm space-y-1.5">
           <li><a href="/products.html" class="hover:text-white transition">Products</a></li>
           <li><a href="/contact.html" class="hover:text-white transition">Contact Us</a></li>
           <li><a href="/" class="hover:text-white transition">Home</a></li>
         </ul>
       </div>
       <div>
-        <h3 class="text-white font-semibold mb-3">Store Hours</h3>
-        <p class="text-sm">Mon-Fri: 8:00 AM - 6:00 PM</p>
-        <p class="text-sm">Sat: 9:00 AM - 4:00 PM</p>
-        <p class="text-sm">Sun: Closed</p>
-        <p class="text-sm mt-2">📞 +254 700 123 456</p>
+        <h3 class="text-white font-bold mb-3">Contact & Hours</h3>
+        <p class="text-sm">📞 +254 700 123 456</p>
         <p class="text-sm">📧 info@farajaholdings.com</p>
+        <p class="text-sm mt-3 font-semibold">Hours:</p>
+        <p class="text-sm">Mon-Fri: 8AM - 6PM</p>
+        <p class="text-sm">Sat: 9AM - 4PM</p>
       </div>
     </div>
-    <div class="border-t border-gray-700 max-w-7xl mx-auto px-4 py-4 text-sm text-gray-500">© 2025 Faraja Holdings. All rights reserved.</div>
+    <div class="border-t border-gray-700 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-sm text-gray-500 text-center">© 2026 Faraja Holdings. All rights reserved.</div>
   </footer>
 
   <script src="/assets/js/api.js"></script>
