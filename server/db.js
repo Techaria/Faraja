@@ -8,7 +8,11 @@ const pool = mysql.createPool({
   database: process.env.DB_NAME || 'faraja_db',
   waitForConnections: true,
   connectionLimit: 10,
-  queueLimit: 0
+  queueLimit: 0,
+  ssl: {
+    // Aiven MySQL requires SSL; Render may not provide CA bundle, so skip verify
+    rejectUnauthorized: false
+  }
 });
 
 module.exports = pool;
