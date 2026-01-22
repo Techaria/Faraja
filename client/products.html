@@ -38,34 +38,34 @@
 <body class="bg-gray-50 text-gray-900">
   <div id="site-header"></div>
 
-  <main class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-12">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-12">
     <div class="space-y-8 sm:space-y-10">
       <section class="space-y-4 bg-white border rounded-xl shadow-sm p-4 sm:p-6">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
-          <input type="search" id="search" placeholder="Search products..." class="sm:col-span-2 border rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 focus:outline-none focus:ring-2 focus:ring-primary text-sm" />
-          <button id="filterBtn" class="bg-primary hover:bg-secondary text-white rounded-lg px-4 py-2 sm:py-2.5 font-medium text-sm transition">Search</button>
+          <input type="search" id="search" placeholder="Search products..." class="sm:col-span-2 border border-gray-300 rounded-lg px-3 sm:px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary text-sm" />
+          <button id="filterBtn" class="bg-primary hover:bg-secondary text-white rounded-lg px-4 py-2.5 font-medium text-sm transition">Search</button>
         </div>
-        <select id="category" class="w-full border rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 focus:outline-none focus:ring-2 focus:ring-primary text-sm">
+        <select id="category" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary text-sm">
           <option value="">All Categories</option>
         </select>
         <div id="grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6"></div>
-        <div id="empty" class="hidden text-center py-16 text-gray-500">No products found</div>
+        <div id="empty" class="hidden text-center py-12 sm:py-16 text-gray-500 text-sm">No products found</div>
       </section>
 
       <section id="cart" class="bg-white border rounded-xl shadow-sm p-4 sm:p-6 space-y-4">
         <div class="flex items-center justify-between">
-          <h2 class="text-lg font-semibold text-gray-800">Cart & Checkout</h2>
-          <span id="cartTotal" class="text-sm text-gray-600">Ksh 0.00</span>
+          <h2 class="text-base sm:text-lg font-semibold text-gray-800">Cart & Checkout</h2>
+          <span id="cartTotal" class="text-xs sm:text-sm text-gray-600">Ksh 0.00</span>
         </div>
-        <div id="cartItems" class="space-y-2 text-sm bg-gray-50 rounded-lg p-3 border border-dashed border-gray-200">Your cart is empty.</div>
+        <div id="cartItems" class="space-y-2 text-xs sm:text-sm bg-gray-50 rounded-lg p-3 border border-dashed border-gray-200">Your cart is empty.</div>
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-          <button id="clearCartBtn" class="w-full sm:w-auto text-xs sm:text-sm bg-red-50 hover:bg-red-100 text-red-700 px-4 py-2 rounded transition font-medium">Clear Cart</button>
-          <form id="checkoutForm" class="w-full sm:w-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-            <input type="text" name="name" placeholder="Full name" class="border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary" required />
-            <input type="email" name="email" placeholder="Email" class="border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
-            <input type="text" name="phone" placeholder="Phone" class="border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
-            <textarea name="note" placeholder="Notes (optional)" class="border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary lg:col-span-2" rows="1"></textarea>
-            <button class="sm:col-span-2 lg:col-span-1 bg-primary hover:bg-secondary text-white py-2 rounded text-sm font-medium transition">Checkout</button>
+          <button id="clearCartBtn" class="w-full sm:w-auto text-xs sm:text-sm bg-red-50 hover:bg-red-100 text-red-700 px-4 py-2.5 rounded transition font-medium">Clear Cart</button>
+          <form id="checkoutForm" class="w-full sm:w-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
+            <input type="text" name="name" placeholder="Full name" class="border border-gray-300 rounded-lg px-3 py-2.5 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-primary" required />
+            <input type="email" name="email" placeholder="Email" class="border border-gray-300 rounded-lg px-3 py-2.5 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
+            <input type="text" name="phone" placeholder="Phone" class="border border-gray-300 rounded-lg px-3 py-2.5 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
+            <textarea name="note" placeholder="Notes (optional)" class="border border-gray-300 rounded-lg px-3 py-2.5 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-primary lg:col-span-2" rows="1"></textarea>
+            <button class="sm:col-span-2 lg:col-span-1 bg-primary hover:bg-secondary text-white py-2.5 rounded text-xs sm:text-sm font-medium transition">Checkout</button>
             <div id="checkoutStatus" class="text-xs text-gray-600 lg:col-span-1"></div>
           </form>
         </div>

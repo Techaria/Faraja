@@ -38,125 +38,129 @@
 <body class="bg-gray-50 text-gray-900">
   <div id="site-header"></div>
 
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+  <main class="min-h-screen">
     <!-- Breadcrumb -->
-    <nav class="mb-6 flex items-center space-x-2 text-sm text-gray-600">
-      <a href="/" class="hover:text-primary transition">Home</a>
-      <span>›</span>
-      <a href="/products.html" class="hover:text-primary transition">Products</a>
-      <span>›</span>
-      <span id="breadcrumb-name" class="text-gray-900 font-semibold"></span>
-    </nav>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+      <nav class="flex items-center space-x-2 text-xs sm:text-sm text-gray-600 overflow-x-auto">
+        <a href="/" class="hover:text-primary transition whitespace-nowrap">Home</a>
+        <span class="flex-shrink-0">›</span>
+        <a href="/products.html" class="hover:text-primary transition whitespace-nowrap">Products</a>
+        <span class="flex-shrink-0">›</span>
+        <span id="breadcrumb-name" class="text-gray-900 font-semibold whitespace-nowrap"></span>
+      </nav>
+    </div>
 
     <!-- Product Section -->
-    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 sm:gap-8 mb-16">
-      <!-- Product Image -->
-      <div class="lg:col-span-1 order-1">
-        <div class="bg-white rounded-lg border border-gray-200 overflow-hidden sticky top-20">
-          <img id="image" class="w-full h-80 object-cover" alt="Product" />
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16">
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 sm:gap-8">
+        <!-- Product Image -->
+        <div class="lg:col-span-1">
+          <div class="bg-white rounded-xl border border-gray-200 overflow-hidden sticky top-20">
+            <img id="image" class="w-full h-64 sm:h-80 object-cover" alt="Product" />
+          </div>
         </div>
-      </div>
 
-      <!-- Product Details -->
-      <div class="lg:col-span-2 order-3 lg:order-2">
-        <div class="bg-white rounded-lg border border-gray-200 p-6 sm:p-8">
-          <!-- Category Badge -->
-          <span id="category-badge" class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary mb-3"></span>
-          
-          <!-- Title & Price -->
-          <h1 id="name" class="text-3xl sm:text-4xl font-bold mb-2"></h1>
-          <div class="flex items-center gap-4 mb-6 pb-6 border-b">
-            <div id="price" class="text-accent text-3xl font-bold"></div>
-            <span class="text-sm text-gray-600 bg-gray-100 px-3 py-1 rounded">In Stock</span>
-          </div>
-
-          <!-- Quick Info -->
-          <div class="grid grid-cols-2 gap-4 mb-8 pb-8 border-b">
-            <div>
-              <p class="text-sm text-gray-600">Category</p>
-              <p id="category" class="font-semibold text-gray-900"></p>
+        <!-- Product Details -->
+        <div class="lg:col-span-2">
+          <div class="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 lg:p-8">
+            <!-- Category Badge -->
+            <span id="category-badge" class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary mb-4"></span>
+            
+            <!-- Title & Price -->
+            <h1 id="name" class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 leading-tight"></h1>
+            <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 mb-6 pb-6 border-b">
+              <div id="price" class="text-accent text-2xl sm:text-3xl font-bold"></div>
+              <span class="text-xs sm:text-sm text-gray-600 bg-gray-100 px-3 py-1 rounded whitespace-nowrap">In Stock</span>
             </div>
-            <div>
-              <p class="text-sm text-gray-600">Availability</p>
-              <p class="font-semibold text-green-600">✓ Ready to Ship</p>
-            </div>
-          </div>
 
-          <!-- Add to Cart -->
-          <div class="space-y-5">
-            <!-- Quantity -->
-            <div>
-              <label class="block text-sm font-semibold mb-2">Quantity</label>
-              <div class="flex items-center border border-gray-300 rounded-lg w-fit">
-                <button type="button" id="qty-minus" class="px-3 py-2 text-gray-600 hover:bg-gray-100">−</button>
-                <input type="number" id="quantity" value="1" min="1" class="w-12 text-center py-2 border-0 focus:ring-0" />
-                <button type="button" id="qty-plus" class="px-3 py-2 text-gray-600 hover:bg-gray-100">+</button>
+            <!-- Quick Info -->
+            <div class="grid grid-cols-2 gap-4 mb-8 pb-8 border-b">
+              <div>
+                <p class="text-xs sm:text-sm text-gray-600 mb-1">Category</p>
+                <p id="category" class="font-semibold text-gray-900 text-sm sm:text-base"></p>
+              </div>
+              <div>
+                <p class="text-xs sm:text-sm text-gray-600 mb-1">Availability</p>
+                <p class="font-semibold text-green-600 text-sm sm:text-base">✓ Ready</p>
               </div>
             </div>
 
-            <!-- Add to Cart Button -->
-            <button id="addToCartBtn" class="w-full bg-accent hover:bg-orange-600 text-white py-3 rounded-lg font-semibold text-lg transition">
-              Add to Cart
-            </button>
+            <!-- Add to Cart -->
+            <div class="space-y-4">
+              <!-- Quantity -->
+              <div>
+                <label class="block text-xs sm:text-sm font-semibold mb-2">Quantity</label>
+                <div class="flex items-center border border-gray-300 rounded-lg w-fit">
+                  <button type="button" id="qty-minus" class="px-3 py-2 text-gray-600 hover:bg-gray-100 text-sm">−</button>
+                  <input type="number" id="quantity" value="1" min="1" class="w-12 text-center py-2 border-0 focus:ring-0 text-sm" />
+                  <button type="button" id="qty-plus" class="px-3 py-2 text-gray-600 hover:bg-gray-100 text-sm">+</button>
+                </div>
+              </div>
 
-            <!-- Alternative Actions -->
-            <div class="flex gap-3">
-              <button type="button" class="flex-1 border border-primary text-primary hover:bg-primary/5 py-2 rounded-lg font-semibold transition">
-                Add to Wishlist
+              <!-- Add to Cart Button -->
+              <button id="addToCartBtn" class="w-full bg-accent hover:bg-orange-600 text-white py-3 rounded-lg font-semibold transition text-sm sm:text-base">
+                🛒 Add to Cart
               </button>
-              <button type="button" class="flex-1 border border-gray-300 text-gray-700 hover:bg-gray-50 py-2 rounded-lg font-semibold transition">
-                Share
-              </button>
+
+              <!-- Alternative Actions -->
+              <div class="flex gap-2 sm:gap-3">
+                <button type="button" class="flex-1 border border-primary text-primary hover:bg-primary/5 py-2 rounded-lg font-semibold transition text-xs sm:text-sm">
+                  ♡ Wishlist
+                </button>
+                <button type="button" class="flex-1 border border-gray-300 text-gray-700 hover:bg-gray-50 py-2 rounded-lg font-semibold transition text-xs sm:text-sm">
+                  📤 Share
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Sidebar: Cart -->
-      <div class="lg:col-span-1 order-2 lg:order-3">
+      <div class="lg:col-span-1">
         <!-- Cart Section (Hidden by default) -->
-        <div id="cartSidebar" class="hidden bg-white rounded-lg border border-gray-200 p-4 sm:p-6 shadow-sm sticky top-20">
-          <div class="flex items-center justify-between mb-3 sm:mb-4">
+        <div id="cartSidebar" class="hidden bg-white rounded-xl border border-gray-200 p-4 sm:p-6 shadow-sm sticky top-20">
+          <div class="flex items-center justify-between mb-4">
             <h3 class="text-base sm:text-lg font-bold">Your Cart</h3>
             <span class="text-xs sm:text-sm text-gray-500" id="cartTotal">Ksh 0.00</span>
           </div>
-          <div id="cartItems" class="space-y-2 max-h-64 overflow-y-auto mb-3 sm:mb-4 text-sm"></div>
-          <button id="clearCartBtn" class="w-full mb-2 sm:mb-3 text-xs sm:text-sm bg-red-100 hover:bg-red-200 text-red-700 py-2 rounded transition font-medium">Clear Cart</button>
-          <a href="/products.html" class="block w-full text-center bg-primary hover:bg-secondary text-white py-2 rounded font-semibold transition text-xs sm:text-sm mb-2 sm:mb-3">Continue Shopping</a>
+          <div id="cartItems" class="space-y-2 max-h-64 overflow-y-auto mb-4 text-xs sm:text-sm"></div>
+          <button id="clearCartBtn" class="w-full mb-3 text-xs sm:text-sm bg-red-50 hover:bg-red-100 text-red-700 py-2 rounded transition font-medium">Clear Cart</button>
+          <a href="/products.html" class="block w-full text-center bg-primary hover:bg-secondary text-white py-2 rounded font-semibold transition text-xs sm:text-sm">Continue Shopping</a>
         </div>
       </div>
     </div>
 
     <!-- Similar Products Section -->
-    <section class="mb-16">
-      <h2 class="text-2xl sm:text-3xl font-bold mb-8">Similar Products You May Like</h2>
-      <div id="similar-products" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <section class="mb-12 sm:mb-16">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8">Similar Products</h2>
+      <div id="similar-products" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
         <!-- Populated by JavaScript -->
       </div>
     </section>
 
     <!-- Trust Section -->
-    <section class="bg-white rounded-lg border border-gray-200 p-6 sm:p-8">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="flex items-start gap-4">
-          <div class="text-3xl">🚚</div>
-          <div>
-            <h3 class="font-semibold text-lg mb-1">Fast Delivery</h3>
-            <p class="text-sm text-gray-600">We deliver across Kenya within 24-48 hours</p>
+    <section class="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 lg:p-8">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+        <div class="flex gap-3 sm:gap-4">
+          <div class="text-3xl flex-shrink-0">🚚</div>
+          <div class="min-w-0">
+            <h3 class="font-semibold text-sm sm:text-base mb-1">Fast Delivery</h3>
+            <p class="text-xs sm:text-sm text-gray-600">24-48 hours Kenya-wide</p>
           </div>
         </div>
-        <div class="flex items-start gap-4">
-          <div class="text-3xl">✓</div>
-          <div>
-            <h3 class="font-semibold text-lg mb-1">Guaranteed Quality</h3>
-            <p class="text-sm text-gray-600">100% authentic products verified before dispatch</p>
+        <div class="flex gap-3 sm:gap-4">
+          <div class="text-3xl flex-shrink-0">✓</div>
+          <div class="min-w-0">
+            <h3 class="font-semibold text-sm sm:text-base mb-1">Quality Guaranteed</h3>
+            <p class="text-xs sm:text-sm text-gray-600">100% verified products</p>
           </div>
         </div>
-        <div class="flex items-start gap-4">
-          <div class="text-3xl">💬</div>
-          <div>
-            <h3 class="font-semibold text-lg mb-1">Expert Support</h3>
-            <p class="text-sm text-gray-600">Our team is available 24/7 to help you</p>
+        <div class="flex gap-3 sm:gap-4">
+          <div class="text-3xl flex-shrink-0">💬</div>
+          <div class="min-w-0">
+            <h3 class="font-semibold text-sm sm:text-base mb-1">24/7 Support</h3>
+            <p class="text-xs sm:text-sm text-gray-600">Expert team available</p>
           </div>
         </div>
       </div>
