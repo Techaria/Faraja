@@ -148,7 +148,7 @@ async function loadProductsAdmin() {
     <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all-smooth flex flex-col sm:flex-row">
       <!-- Image -->
       <div class="w-full sm:w-32 h-40 sm:h-32 flex-shrink-0 bg-gray-100 overflow-hidden">
-        <img src="${p.image_path || '/uploads/default-hardware.jpg'}" alt="${p.name}" class="w-full h-full object-cover" onerror="this.src='/uploads/default-hardware.jpg'" />
+        <img src="${p.has_image ? `/api/products/${p.id}/image` : '/uploads/default-hardware.jpg'}" alt="${p.name}" class="w-full h-full object-cover" onerror="this.src='/uploads/default-hardware.jpg'" />
       </div>
       
       <!-- Content -->

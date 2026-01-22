@@ -10,7 +10,8 @@ CREATE TABLE IF NOT EXISTS products (
   name VARCHAR(255) NOT NULL,
   category_id INT NULL,
   price DECIMAL(10,2) NOT NULL,
-  image_path VARCHAR(255) NULL,
+  image_data LONGBLOB NULL,
+  image_mime_type VARCHAR(50) NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT fk_products_category FOREIGN KEY (category_id)
     REFERENCES categories(id) ON DELETE SET NULL ON UPDATE CASCADE

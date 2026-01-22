@@ -12,6 +12,9 @@ const API = {
     const res = await fetch(`/api/products/${id}`);
     return res.json();
   },
+  getProductImageUrl(id) {
+    return `/api/products/${id}/image`;
+  },
   async createOrder(payload) {
     const res = await fetch('/api/orders', {
       method: 'POST',

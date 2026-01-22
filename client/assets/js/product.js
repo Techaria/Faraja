@@ -95,7 +95,7 @@ async function loadProduct() {
   document.getElementById('category-badge').textContent = p.category || 'Product';
   document.getElementById('price').textContent = `Ksh ${Number(p.price).toFixed(2)}`;
   const img = document.getElementById('image');
-  if (p.image_path) { img.src = p.image_path; } else { img.style.display = 'none'; }
+  if (p.has_image) { img.src = API.getProductImageUrl(p.id); } else { img.style.display = 'none'; }
   
   loadSimilarProducts(p.category);
 }
@@ -113,7 +113,7 @@ async function loadSimilarProducts(category) {
     grid.innerHTML = similar.length > 0 
       ? similar.map(p => `
           <div class="card-hover bg-white rounded-lg border border-gray-200 overflow-hidden">
-            <img src="${p.image_path || '/uploads/default-hardware.jpg'}" alt="${p.name}" class="w-full h-40 object-cover" />
+            <img src="${p.has_image ? API.getProductImageUrl(p.id) : '/uploads/default-hardware.jpg'}" alt="${p.name}" class="w-full h-40 object-cover" />
             <div class="p-4">
               <h3 class="font-semibold text-gray-900 text-sm mb-2 line-clamp-2">${p.name}</h3>
               <p class="text-accent font-bold text-lg mb-3">Ksh ${Number(p.price).toFixed(0)}</p>

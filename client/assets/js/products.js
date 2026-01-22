@@ -103,7 +103,7 @@ async function loadProducts(params = {}) {
   grid.innerHTML = randomItems.map(p => `
     <div class="group bg-white rounded-xl border overflow-hidden shadow-sm hover:shadow-lg transition-all duration-200 flex flex-col">
       <a href="/product.html?id=${p.id}" class="block overflow-hidden">
-        <img src="${p.image_path || ''}" alt="${p.name}" class="w-full h-44 object-cover group-hover:scale-[1.02] transition-transform duration-200" onerror="this.style.display='none'" />
+        <img src="${p.has_image ? API.getProductImageUrl(p.id) : ''}" alt="${p.name}" class="w-full h-44 object-cover group-hover:scale-[1.02] transition-transform duration-200" onerror="this.style.display='none'" />
       </a>
       <div class="p-4 flex-1 flex flex-col gap-2">
         <div class="text-xs uppercase tracking-wide text-primary font-semibold">${p.category || 'Uncategorized'}</div>

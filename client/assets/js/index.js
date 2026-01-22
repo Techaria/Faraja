@@ -56,7 +56,7 @@ async function startHeroSlider() {
   if (!heroBg) return;
   try {
     const products = await API.getProducts({ limit: 6 });
-    heroImages = products.filter(p => p.image_path).map(p => p.image_path);
+    heroImages = products.filter(p => p.has_image).map(p => API.getProductImageUrl(p.id));
     if (heroImages.length === 0) {
       heroImages = ['/uploads/default-hardware.jpg'];
     }
@@ -108,7 +108,7 @@ async function loadOffers() {
     offersGrid.innerHTML = products.map(p => `
       <div class="card-hover bg-white rounded-lg border border-orange-200 overflow-hidden">
         <div class="relative">
-          <img src="${p.image_path || '/uploads/default-hardware.jpg'}" alt="${p.name}" class="w-full h-40 object-cover" />
+          <img src="${p.has_image ? API.getProductImageUrl(p.id) : '/uploads/default-hardware.jpg'}" alt="${p.name}" class="w-full h-40 object-cover" />
           <div class="absolute top-2 right-2 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold">
             -15%
           </div>
