@@ -30,35 +30,6 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', time: new Date().toISOString() });
 });
 
-// Database test (temporary, for debugging)
-app.get('/api/test-db', async (req, res, next) => {
-  try {
-    const pool = require('./db');
-    const [rows] = await pool.query('SELECT 1 as connection_test');
-    res.json({
-      status: 'Database connection successful',
-      test: rows[0],
-      config: {
-        host: process.env.DB_HOST || 'localhost',
-        port: process.env.DB_PORT || 3306,
-        user: process.env.DB_USER || 'root',
-        database: process.env.DB_NAME || 'faraja_db'
-      }
-    });
-  } catch (err) {
-    res.status(500).json({
-      status: 'Database connection failed',
-      error: err.message,
-      config: {
-        host: process.env.DB_HOST || 'localhost',
-        port: process.env.DB_PORT || 3306,
-        user: process.env.DB_USER || 'root',
-        database: process.env.DB_NAME || 'faraja_db'
-      }
-    });
-  }
-});
-
 // Fallback to client index for root
 app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/index.html'));
