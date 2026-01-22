@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Product Details - Faraja Holdings</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -36,24 +36,7 @@
   </style>
 </head>
 <body class="bg-gray-50 text-gray-900">
-  <header class="sticky-header">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
-      <a href="/" class="text-xl sm:text-2xl font-bold text-primary">Faraja Holdings</a>
-      <nav class="hidden md:flex space-x-6 text-gray-700 text-sm">
-        <a href="/products.html" class="hover:text-primary transition">Products</a>
-        <a href="/contact.html" class="hover:text-primary transition">Contact</a>
-        <a href="/admin" class="hover:text-secondary transition">Admin</a>
-      </nav>
-      <button id="mobileMenuBtn" class="md:hidden text-primary text-2xl">☰</button>
-    </div>
-    <nav id="mobileMenu" class="hidden md:hidden bg-white border-t">
-      <div class="px-4 py-2 space-y-2 text-sm">
-        <a href="/products.html" class="block py-2 hover:text-primary">Products</a>
-        <a href="/contact.html" class="block py-2 hover:text-primary">Contact</a>
-        <a href="/admin" class="block py-2 hover:text-primary">Admin</a>
-      </div>
-    </nav>
-  </header>
+  <div id="site-header"></div>
 
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
     <!-- Breadcrumb -->
@@ -180,38 +163,10 @@
     </section>
   </main>
 
-  <footer class="bg-gray-900 text-gray-300 mt-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
-      <div>
-        <h3 class="text-white font-bold mb-3">Faraja Holdings</h3>
-        <p class="text-sm leading-relaxed">Premium hardware and building supplies for professionals and DIY enthusiasts across Kenya.</p>
-      </div>
-      <div>
-        <h3 class="text-white font-bold mb-3">Quick Links</h3>
-        <ul class="text-sm space-y-1.5">
-          <li><a href="/products.html" class="hover:text-white transition">Products</a></li>
-          <li><a href="/contact.html" class="hover:text-white transition">Contact Us</a></li>
-          <li><a href="/" class="hover:text-white transition">Home</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3 class="text-white font-bold mb-3">Contact & Hours</h3>
-        <p class="text-sm">📞 +254 700 123 456</p>
-        <p class="text-sm">📧 info@farajaholdings.com</p>
-        <p class="text-sm mt-3 font-semibold">Hours:</p>
-        <p class="text-sm">Mon-Fri: 8AM - 6PM</p>
-        <p class="text-sm">Sat: 9AM - 4PM</p>
-      </div>
-    </div>
-    <div class="border-t border-gray-700 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-sm text-gray-500 text-center">© <span id="year"></span> Faraja Holdings. All rights reserved.</div>
-  </footer>
+  <div id="site-footer"></div>
 
   <script src="/assets/js/api.js"></script>
-  <script>
-    document.getElementById('mobileMenuBtn').addEventListener('click', () => {
-      document.getElementById('mobileMenu').classList.toggle('hidden');
-    });
-  </script>
+  <script src="/assets/js/layout.js"></script>
   <script src="/assets/js/product.js"></script>
 </body>
 </html>

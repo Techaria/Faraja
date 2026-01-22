@@ -34,20 +34,12 @@ async function loadCategories() {
 function renderCart() {
   const list = document.getElementById('cartItems');
   const totalEl = document.getElementById('cartTotal');
-  const cartSidebar = document.getElementById('cartSidebar');
-  
-  if (!list) return;
-  
-  // Show cart sidebar if there are items, hide if empty
-  if (cart.length > 0 && cartSidebar) {
-    cartSidebar.classList.remove('hidden');
-  } else if (cart.length === 0 && cartSidebar) {
-    cartSidebar.classList.add('hidden');
-  }
+  if (!list || !totalEl) return;
   
   if (cart.length === 0) {
     list.innerHTML = '<div class="text-xs text-gray-500">Your cart is empty.</div>';
     totalEl.textContent = 'Ksh 0.00';
+    if (window.updateCartCount) window.updateCartCount();
     return;
   }
   
@@ -89,6 +81,8 @@ function renderCart() {
       renderCart();
     });
   });
+
+  if (window.updateCartCount) window.updateCartCount();
 }
 
 async function loadProduct() {
@@ -154,6 +148,7 @@ function addToCart() {
   saveCart();
   renderCart();
   document.getElementById('quantity').value = 1;
+  if (window.showToast) window.showToast(`✓ ${currentProduct.name} (${quantity}) added to cart`);
 }
 
 // Quantity controls
@@ -176,10 +171,8 @@ if (qtyPlus) {
   });
 }
 
-document.getElementById('year').textContent = new Date().getFullYear();
-document.getElementById('mobileMenuBtn').addEventListener('click', () => {
-  document.getElementById('mobileMenu').classList.toggle('hidden');
-});
+const yearEl = document.querySelector('[data-year]');
+if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 const clearCartBtn = document.getElementById('clearCartBtn');
 if (clearCartBtn) {

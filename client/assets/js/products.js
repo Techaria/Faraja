@@ -13,24 +13,17 @@ function saveCart() {
 function renderCart() {
   const list = document.getElementById('cartItems');
   const totalEl = document.getElementById('cartTotal');
-  const cartSidebar = document.getElementById('cartSidebar');
-  
-  if (!list) return;
-  
-  // Show cart sidebar if there are items, hide if empty
-  if (cart.length > 0 && cartSidebar) {
-    cartSidebar.classList.remove('hidden');
-  } else if (cart.length === 0 && cartSidebar) {
-    cartSidebar.classList.add('hidden');
-  }
-  
+  if (!list || !totalEl) return;
+
   if (cart.length === 0) {
     list.innerHTML = '<div class="text-sm text-gray-500">Your cart is empty.</div>';
     totalEl.textContent = 'Ksh 0.00';
+    if (window.updateCartCount) window.updateCartCount();
     return;
   }
+
   list.innerHTML = cart.map(item => `
-    <div class="flex items-center justify-between gap-3 border-b py-2">
+    <div class="flex items-center justify-between gap-3 border-b border-gray-200 py-2">
       <div>
         <div class="font-medium text-sm">${item.name}</div>
         <div class="text-xs text-gray-500">Ksh ${Number(item.price).toFixed(2)} x ${item.quantity}</div>
@@ -64,6 +57,8 @@ function renderCart() {
       renderCart();
     });
   });
+
+  if (window.updateCartCount) window.updateCartCount();
 }
 
 async function loadCategories() {
@@ -102,21 +97,32 @@ function shuffleArray(array) {
 
 async function loadProducts(params = {}) {
   const grid = document.getElementById('grid');
+  const emptyEl = document.getElementById('empty');
   const items = await API.getProducts(params);
   const randomItems = shuffleArray(items);
   grid.innerHTML = randomItems.map(p => `
-    <div class="group bg-white rounded-lg border overflow-hidden hover:shadow transition flex flex-col">
-      <a href="/product.html?id=${p.id}" class="block">
-        <img src="${p.image_path || ''}" alt="${p.name}" class="w-full h-40 object-cover group-hover:opacity-95 transition" onerror="this.style.display='none'" />
+    <div class="group bg-white rounded-xl border overflow-hidden shadow-sm hover:shadow-lg transition-all duration-200 flex flex-col">
+      <a href="/product.html?id=${p.id}" class="block overflow-hidden">
+        <img src="${p.image_path || ''}" alt="${p.name}" class="w-full h-44 object-cover group-hover:scale-[1.02] transition-transform duration-200" onerror="this.style.display='none'" />
       </a>
       <div class="p-4 flex-1 flex flex-col gap-2">
-        <div class="text-sm text-gray-500">${p.category || 'Uncategorized'}</div>
-        <a href="/product.html?id=${p.id}" class="font-semibold hover:text-teal-700">${p.name}</a>
-        <div class="text-primary font-medium">Ksh ${Number(p.price).toFixed(2)}</div>
-        <button class="mt-auto bg-teal-700 hover:bg-teal-800 text-white text-sm px-3 py-2 rounded add-to-cart" data-id="${p.id}" data-name="${p.name}" data-price="${p.price}">Add to Cart</button>
+        <div class="text-xs uppercase tracking-wide text-primary font-semibold">${p.category || 'Uncategorized'}</div>
+        <a href="/product.html?id=${p.id}" class="font-semibold text-gray-800 leading-snug line-clamp-2 group-hover:text-secondary">${p.name}</a>
+        <div class="text-lg font-bold text-primary">Ksh ${Number(p.price).toFixed(2)}</div>
+        <button class="mt-auto bg-primary hover:bg-secondary text-white text-sm px-3 py-2 rounded-lg add-to-cart transition" data-id="${p.id}" data-name="${p.name}" data-price="${p.price}">Add to Cart</button>
       </div>
     </div>
   `).join('');
+
+  if (emptyEl) {
+    if (randomItems.length === 0) {
+      emptyEl.classList.remove('hidden');
+      grid.classList.add('hidden');
+    } else {
+      emptyEl.classList.add('hidden');
+      grid.classList.remove('hidden');
+    }
+  }
 
   grid.querySelectorAll('.add-to-cart').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -131,6 +137,7 @@ async function loadProducts(params = {}) {
       }
       saveCart();
       renderCart();
+      if (window.showToast) window.showToast(`✓ ${name} added to cart`);
     });
   });
 }

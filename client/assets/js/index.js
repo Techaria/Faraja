@@ -1,13 +1,5 @@
-document.getElementById('year').textContent = new Date().getFullYear();
-
-// Mobile menu toggle
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const mobileMenu = document.getElementById('mobileMenu');
-if (mobileMenuBtn) {
-  mobileMenuBtn.addEventListener('click', () => {
-    mobileMenu.classList.toggle('hidden');
-  });
-}
+const yearEl = document.querySelector('[data-year]');
+if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 // Category icons mapping
 const categoryIcons = {

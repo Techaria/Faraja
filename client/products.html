@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Products - Faraja Holdings</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -36,28 +36,11 @@
   </style>
 </head>
 <body class="bg-gray-50 text-gray-900">
-  <header class="sticky-header">
-    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
-      <a href="/" class="text-lg sm:text-2xl font-bold text-primary">Faraja Holdings</a>
-      <nav class="hidden md:flex space-x-6 text-gray-700 text-sm">
-        <a href="/products.html" class="hover:text-primary transition font-medium">Products</a>
-        <a href="/contact.html" class="hover:text-primary transition">Contact</a>
-        <a href="/admin" class="hover:text-secondary transition">Admin</a>
-      </nav>
-      <button id="mobileMenuBtn" class="md:hidden text-primary text-2xl">☰</button>
-    </div>
-    <nav id="mobileMenu" class="hidden md:hidden bg-white border-t">
-      <div class="px-3 py-2 space-y-2 text-sm">
-        <a href="/products.html" class="block py-2 font-medium text-primary">Products</a>
-        <a href="/contact.html" class="block py-2 hover:text-primary">Contact</a>
-        <a href="/admin" class="block py-2 hover:text-primary">Admin</a>
-      </div>
-    </nav>
-  </header>
+  <div id="site-header"></div>
 
   <main class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-12">
-    <div class="grid lg:grid-cols-3 gap-4 sm:gap-6 items-start">
-      <div class="lg:col-span-2 space-y-3 sm:space-y-4">
+    <div class="space-y-8 sm:space-y-10">
+      <section class="space-y-4 bg-white border rounded-xl shadow-sm p-4 sm:p-6">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
           <input type="search" id="search" placeholder="Search products..." class="sm:col-span-2 border rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 focus:outline-none focus:ring-2 focus:ring-primary text-sm" />
           <button id="filterBtn" class="bg-primary hover:bg-secondary text-white rounded-lg px-4 py-2 sm:py-2.5 font-medium text-sm transition">Search</button>
@@ -65,64 +48,35 @@
         <select id="category" class="w-full border rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 focus:outline-none focus:ring-2 focus:ring-primary text-sm">
           <option value="">All Categories</option>
         </select>
-        <div id="grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4"></div>
+        <div id="grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6"></div>
         <div id="empty" class="hidden text-center py-16 text-gray-500">No products found</div>
-      </div>
+      </section>
 
-      <aside class="space-y-4">
-        <!-- Cart Sidebar -->
-        <div id="cartSidebar" class="hidden bg-white border rounded-lg p-4 sm:p-5 shadow-sm sticky top-20">
-          <div class="flex items-center justify-between mb-3">
-            <h2 class="text-base sm:text-lg font-semibold">Cart</h2>
-            <span class="text-xs sm:text-sm text-gray-500" id="cartTotal">Ksh 0.00</span>
-          </div>
-          <div id="cartItems" class="space-y-2 max-h-72 overflow-y-auto pr-1 text-sm"></div>
-          <button id="clearCartBtn" class="w-full mt-3 text-xs sm:text-sm bg-red-100 hover:bg-red-200 text-red-700 py-2 rounded transition font-medium">Clear Cart</button>
-          <form id="checkoutForm" class="mt-4 space-y-2 sm:space-y-3">
-            <input type="text" name="name" placeholder="Full name" class="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary" required />
-            <input type="email" name="email" placeholder="Email" class="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
-            <input type="text" name="phone" placeholder="Phone" class="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
-            <textarea name="note" placeholder="Notes (optional)" class="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary" rows="2"></textarea>
-            <button class="w-full bg-primary hover:bg-secondary text-white py-2 rounded text-sm font-medium transition">Checkout</button>
-            <div id="checkoutStatus" class="text-xs text-gray-600"></div>
+      <section id="cart" class="bg-white border rounded-xl shadow-sm p-4 sm:p-6 space-y-4">
+        <div class="flex items-center justify-between">
+          <h2 class="text-lg font-semibold text-gray-800">Cart & Checkout</h2>
+          <span id="cartTotal" class="text-sm text-gray-600">Ksh 0.00</span>
+        </div>
+        <div id="cartItems" class="space-y-2 text-sm bg-gray-50 rounded-lg p-3 border border-dashed border-gray-200">Your cart is empty.</div>
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <button id="clearCartBtn" class="w-full sm:w-auto text-xs sm:text-sm bg-red-50 hover:bg-red-100 text-red-700 px-4 py-2 rounded transition font-medium">Clear Cart</button>
+          <form id="checkoutForm" class="w-full sm:w-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <input type="text" name="name" placeholder="Full name" class="border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary" required />
+            <input type="email" name="email" placeholder="Email" class="border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
+            <input type="text" name="phone" placeholder="Phone" class="border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
+            <textarea name="note" placeholder="Notes (optional)" class="border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary lg:col-span-2" rows="1"></textarea>
+            <button class="sm:col-span-2 lg:col-span-1 bg-primary hover:bg-secondary text-white py-2 rounded text-sm font-medium transition">Checkout</button>
+            <div id="checkoutStatus" class="text-xs text-gray-600 lg:col-span-1"></div>
           </form>
         </div>
-      </aside>
+      </section>
     </div>
   </main>
 
-  <footer class="bg-gray-900 text-gray-300 mt-8 sm:mt-12">
-    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8">
-      <div>
-        <h3 class="text-white font-bold mb-2 sm:mb-3 text-sm sm:text-base">Faraja Holdings</h3>
-        <p class="text-xs sm:text-sm leading-relaxed">Premium hardware and building supplies for professionals and DIY enthusiasts.</p>
-      </div>
-      <div>
-        <h3 class="text-white font-bold mb-2 sm:mb-3 text-sm sm:text-base">Quick Links</h3>
-        <ul class="text-xs sm:text-sm space-y-1">
-          <li><a href="/products.html" class="hover:text-white transition">Products</a></li>
-          <li><a href="/contact.html" class="hover:text-white transition">Contact Us</a></li>
-          <li><a href="/" class="hover:text-white transition">Home</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3 class="text-white font-bold mb-2 sm:mb-3 text-sm sm:text-base">Contact & Hours</h3>
-        <p class="text-xs sm:text-sm">📞 +254 700 123 456</p>
-        <p class="text-xs sm:text-sm">📧 info@farajaholdings.com</p>
-        <p class="text-xs sm:text-sm mt-2 font-semibold">Hours:</p>
-        <p class="text-xs sm:text-sm">Mon-Fri: 8AM - 6PM</p>
-        <p class="text-xs sm:text-sm">Sat: 9AM - 4PM</p>
-      </div>
-    </div>
-    <div class="border-t border-gray-700 max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-3 sm:py-4 text-xs sm:text-sm text-gray-500 text-center">© 2025 Faraja Holdings. All rights reserved.</div>
-  </footer>
+  <div id="site-footer"></div>
 
   <script src="/assets/js/api.js"></script>
-  <script>
-    document.getElementById('mobileMenuBtn').addEventListener('click', () => {
-      document.getElementById('mobileMenu').classList.toggle('hidden');
-    });
-  </script>
+  <script src="/assets/js/layout.js"></script>
   <script src="/assets/js/products.js"></script>
 </body>
 </html>
