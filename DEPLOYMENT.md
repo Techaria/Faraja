@@ -45,7 +45,7 @@
    - **Runtime**: Node
    - **Build Command**: `npm install`
    - **Start Command**: `npm start`
-   - **Plan**: Starter (or Free)
+   - **Plan**: Free
 
 4. Add Environment Variables (click **Advanced** → **Add Environment Variable**):
    ```
@@ -64,13 +64,9 @@
    FROM_EMAIL=noreply@farajaholdings.com
    ```
 
-5. Add Persistent Disk (for uploads):
-   - Click **Advanced** → **Add Disk**
-   - **Name**: uploads-disk
-   - **Mount Path**: `/opt/render/project/src/uploads`
-   - **Size**: 1 GB (increase as needed)
+5. Click **Create Web Service**
 
-6. Click **Create Web Service**
+> **Note**: Free tier does NOT support persistent disks. Uploads will be stored in ephemeral storage and will be lost on restarts. For production, use cloud storage (see below) or upgrade to paid plan.
 
 ## Step 3: Configure SMTP (Gmail Example)
 
@@ -104,9 +100,10 @@
 - Ensure schema is applied (`server/schema.sql`)
 
 ### Upload Issues
-- Verify persistent disk is mounted correctly
-- Check disk path matches Express static configuration
-- Consider using cloud storage (AWS S3, Backblaze B2) for production
+- **Free tier**: Uploads are stored in ephemeral storage and lost on service restarts
+- **Recommended**: Use cloud storage (AWS S3, Cloudinary, Backblaze B2) for production
+- To implement cloud storage, update the multer configuration in `server/middlewares/upload.js`
+- Or upgrade to paid Render plan for persistent disk support
 
 ### Email Not Sending
 - Verify SMTP credentials
@@ -114,9 +111,14 @@
 - Monitor Render logs for email errors
 - Emails are sent on cart checkout only
 
-### Performance Issues
-- Render free tier sleeps after 15 minutes of inactivity
-- Upgrade to Starter plan for always-on service
+### Performance Issues (Free Tier)
+- **Service sleeps after 15 minutes of inactivity** - First request after sleep takes ~30-60 seconds
+- **Build minutes limited** - 750 build hours/month on free tier
+- **No persistent disk** - Uploads lost on restart
+- To fix: Upgrade to Starter plan ($7/month) for:
+  - Always-on service (no sleep)
+  - Persistent disk support
+  - More build minutes
 - Consider adding caching layer (Redis) for better performance
 
 ## Monitoring
@@ -137,13 +139,27 @@
 - Store backups securely
 
 ### Backing Up Uploads
-- Download from persistent disk periodically
-- Consider S3/B2 for automatic backups
+- **Free tier**: No persistent disk - uploads are ephemeral
+- **Recommended**: Use cloud storage (S3, Cloudinary, Backblaze B2) to avoid data loss
+- Or upgrade to paid plan with persistent disk and backup regularly
 
-## Cost Estimate (Render Starter Plan)
-- Web Service: $7/month (always on)
+## Cost Estimate
+
+### Free Tier (Current Setup)
+- Web Service: **$0/month** ✅
+- MySQL Database: **$0/month** (using Aiven/PlanetScale free tier) ✅
+- **Total**: **FREE**
+- **Limitations**:
+  - Service sleeps after 15 minutes
+  - 750 build hours/month
+  - No persistent disk (uploads lost on restart)
+  - Shared resources
+
+### Upgrade to Paid (Optional)
+- Web Service (Starter): $7/month (always on)
 - Persistent Disk (1GB): $0.25/month
-- **Total**: ~$7.25/month (use external MySQL provider)
+- MySQL (External): $0-15/month depending on provider
+- **Total**: ~$7-22/month
 
 ## Support
 - Render Docs: https://render.com/docs

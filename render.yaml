@@ -3,7 +3,7 @@ services:
     name: faraja-server
     runtime: node
     region: oregon
-    plan: starter
+    plan: free
     rootDir: server
     buildCommand: npm install
     startCommand: npm start
@@ -34,14 +34,3 @@ services:
         sync: false
       - key: FROM_EMAIL
         sync: false
-    disk:
-      name: uploads-disk
-      mountPath: /opt/render/project/src/uploads
-      sizeGB: 1
-
-databases:
-  - name: faraja-mysql
-    databaseName: faraja_db
-    user: faraja_user
-    region: oregon
-    plan: starter
