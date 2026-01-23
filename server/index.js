@@ -4,6 +4,10 @@ const cors = require('cors');
 const morgan = require('morgan');
 const path = require('path');
 
+// Run migrations before starting app
+const migrate = require('./migrations/001-add-image-blob');
+migrate().catch(err => console.error('Migration error:', err));
+
 const app = express();
 
 // Middlewares
