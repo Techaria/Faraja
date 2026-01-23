@@ -58,7 +58,7 @@ async function startHeroSlider() {
     const products = await API.getProducts({ limit: 6 });
     heroImages = products.filter(p => p.has_image).map(p => API.getProductImageUrl(p.id));
     if (heroImages.length === 0) {
-      heroImages = ['/uploads/default-hardware.jpg'];
+      heroImages = ['/assets/img/default-hardware.svg'];
     }
     setHeroImage();
     setInterval(() => {
@@ -67,7 +67,7 @@ async function startHeroSlider() {
     }, 5000);
   } catch (err) {
     console.error('Hero slider error:', err);
-    heroImages = ['/uploads/default-hardware.jpg'];
+    heroImages = ['/assets/img/default-hardware.svg'];
     setHeroImage();
   }
 }
@@ -108,7 +108,7 @@ async function loadOffers() {
     offersGrid.innerHTML = products.map(p => `
       <div class="card-hover bg-white rounded-lg border border-orange-200 overflow-hidden">
         <div class="relative">
-          <img src="${p.has_image ? API.getProductImageUrl(p.id) : '/uploads/default-hardware.jpg'}" alt="${p.name}" class="w-full h-40 object-cover" />
+          <img src="${p.has_image ? API.getProductImageUrl(p.id) : '/assets/img/default-hardware.svg'}" alt="${p.name}" class="w-full h-40 object-cover" />
           <div class="absolute top-2 right-2 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold">
             -15%
           </div>

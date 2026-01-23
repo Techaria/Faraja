@@ -113,7 +113,7 @@ async function loadSimilarProducts(category) {
     grid.innerHTML = similar.length > 0 
       ? similar.map(p => `
           <div class="card-hover bg-white rounded-lg border border-gray-200 overflow-hidden">
-            <img src="${p.has_image ? API.getProductImageUrl(p.id) : '/uploads/default-hardware.jpg'}" alt="${p.name}" class="w-full h-40 object-cover" />
+            <img src="${p.has_image ? API.getProductImageUrl(p.id) : '/assets/img/default-hardware.svg'}" alt="${p.name}" class="w-full h-40 object-cover" />
             <div class="p-4">
               <h3 class="font-semibold text-gray-900 text-sm mb-2 line-clamp-2">${p.name}</h3>
               <p class="text-accent font-bold text-lg mb-3">Ksh ${Number(p.price).toFixed(0)}</p>

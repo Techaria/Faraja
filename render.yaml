@@ -28,14 +28,6 @@ services:
         sync: false
       - key: SMTP_SECURE
         sync: false
-    mounts:
-      - path: /opt/render/project/src/uploads
-        diskName: uploads-disk
-        diskSizeGB: 10
-
-disks:
-  - name: uploads-disk
-    sizeSizeGB: 10
       - key: SMTP_USER
         sync: false
       - key: SMTP_PASS
