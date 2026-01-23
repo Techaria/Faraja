@@ -23,9 +23,35 @@ exports.getAll = async (req, res, next) => {
       params.push(Number(limit));
     }
     const [rows] = await pool.query(sql, params);
-    res.json(rows);
+    res.json(rows || []);
   } catch (err) {
-    next(err);
+    console.error('Products getAll error:', err.message);
+    // Fallback: try the old image_path column if image_data doesn't exist
+    try {
+      const { category_id, limit, search } = req.query;
+      const params = [];
+      let sql = `SELECT p.id, p.name, p.price, p.image_path, p.created_at, c.id AS category_id, c.name AS category
+                 FROM products p LEFT JOIN categories c ON p.category_id=c.id`;
+      const where = [];
+      if (category_id) {
+        where.push('p.category_id = ?');
+        params.push(category_id);
+      }
+      if (search) {
+        where.push('p.name LIKE ?');
+        params.push(`%${search}%`);
+      }
+      if (where.length) sql += ' WHERE ' + where.join(' AND ');
+      sql += ' ORDER BY p.created_at DESC';
+      if (limit) {
+        sql += ' LIMIT ?';
+        params.push(Number(limit));
+      }
+      const [rows] = await pool.query(sql, params);
+      res.json(rows || []);
+    } catch (fallbackErr) {
+      next(err);
+    }
   }
 };
 
@@ -41,7 +67,19 @@ exports.getById = async (req, res, next) => {
     if (!rows.length) return res.status(404).json({ error: 'Product not found' });
     res.json(rows[0]);
   } catch (err) {
-    next(err);
+    // Fallback to old schema
+    try {
+      const { id } = req.params;
+      const [rows] = await pool.query(
+        `SELECT p.id, p.name, p.price, p.image_path, p.created_at, c.id AS category_id, c.name AS category
+         FROM products p LEFT JOIN categories c ON p.category_id=c.id WHERE p.id=?`,
+        [id]
+      );
+      if (!rows.length) return res.status(404).json({ error: 'Product not found' });
+      res.json(rows[0]);
+    } catch (fallbackErr) {
+      next(err);
+    }
   }
 };
 
